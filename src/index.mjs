@@ -12,23 +12,24 @@ app.set("view engine", "pug");
 
 // Serve assets from 'static' folder
 app.use(express.static("static"));
+app.use(express.static("images"));
+app.use(express.static("fonts"));
 
 const db = await DatabaseService.connect();
 const { conn } = db;
 
 /* Landing route */
 app.get("/", (req, res) => {
+  res.render("signin");
+});
+
+app.get("/index", (req, res) => {
   res.render("index");
 });
 
 // Sample API route
 app.get("/ping", (req, res) => {
   res.send("pong");
-});
-
-// Landing route
-app.get("/", (req, res) => {
-  res.render("index");
 });
 
 // Gallery route
@@ -38,7 +39,16 @@ app.get("/gallery", (req, res) => {
 
 // About route
 app.get("/about", (req, res) => {
-  res.render("about", { title: "Boring about page" });
+  res.render("about");
+});
+
+// world population route
+app.get("/cities/population/:place", async (req, res) => {
+  const placeName = req.params.place;
+  const population = await db.getPopulation(placeName);
+  if (placeName == "world") {
+    res.render("worldpop", { population });
+  }
 });
 
 app.get("/cities", async (req, res) => {
@@ -47,11 +57,11 @@ app.get("/cities", async (req, res) => {
   return res.render("cities", { rows, fields });
 });
 
-app.get('/cities/:id', async (req, res) => {
+app.get("/cities/:id", async (req, res) => {
   const cityId = req.params.id;
   const city = await db.getCity(cityId);
-  return res.render('city', { city });
-})
+  return res.render("city", { city });
+});
 
 // Returns JSON array of cities
 app.get("/api/cities", async (req, res) => {

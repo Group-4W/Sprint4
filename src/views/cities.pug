@@ -4,7 +4,23 @@ block head
   link(rel="stylesheet", href="/cities.css")
 
 block content
-  h2 Cities
+  p
+    | Find the population of the 
+    a(href='/cities/population/world') world
+    | , a 
+    a(href='#') continent
+    | , a 
+    a(href='#') region
+    | , a 
+    a(href='#') country
+    | , a 
+    a(href='#') district
+    | , or a 
+    a(href='#') city
+    | .
+
+
+  h2 All Cities
   table
     thead
       th.text-center 🏴
