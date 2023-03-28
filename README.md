@@ -14,6 +14,7 @@ The following must be in place:
 - Github repository showing work from all members of the team
 
 - Implementation progress towards final version of application:
+- 
       -> Database design
       -> Database implementation with pre-filled data
       -> Some HTML pages available generated from PUG, perhaps with some static content
