@@ -12,7 +12,7 @@ jobs:
   build:
         working_directory: ~/Sprint3/src
         docker:
-          - image: cimg/node:lts Dockerfile
+          - image: cimg/node:lts
         steps:
           - checkout:
               path: ~/Sprint3
