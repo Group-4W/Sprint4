@@ -1,6 +1,5 @@
 import DatabaseService from "./services/database.service.mjs";
 const db = await DatabaseService.connect();
-const { conn } = db;
 
 const mexico = await db.getCountry(MEX);
 console.log(mexico);
