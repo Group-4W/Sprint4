@@ -6,17 +6,19 @@ orbs:
 jobs:
   start:
     build:
+      working_directory: ~/src
       docker:
         - image: src/dockerfile               # the primary container, where your job's commands are run
       steps:
-        - checkout                              # check out the code in the project directory
-        - run: echo "Test finished"               # print 'hello world'
+        - checkout:                              # check out the code in the project directory
+          path: ~/src
+        - run: npm install               # print 'hello world'
       
 
-workflows:
-  my-workflow:                                # Name of the workflow. You can additional workflows below.
-    jobs:                                     # The jobs to run as part of this workflow
-      - node/test:
-        version: "16.10"
-        pkg-manager: npm
-      - start                             # Example 'hello world' job.
+#workflows:
+#  my-workflow:                                # Name of the workflow. You can additional workflows below.
+#    jobs:                                     # The jobs to run as part of this workflow
+#      - node/test:
+#        version: "16.10"
+#        pkg-manager: npm
+#      - start                             # Example 'hello world' job.
