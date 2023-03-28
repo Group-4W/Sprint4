@@ -1,5 +1,6 @@
 import mysql from "mysql2/promise";
 import City from "../models/city.mjs";
+import Country from "../models/country.mjs";
 
 export default class DatabaseService {
   conn;
@@ -28,6 +29,22 @@ export default class DatabaseService {
     return city;
   }
 
+  async getCountry(countryCode) {
+    const [rows, fields] = await this.conn.execute(
+      `SELECT * FROM country WHERE Code = "${countryCode}"`
+    );
+    const { Code, Name, Continent, Region, Population, Capital } = rows[0];
+    const country = new Country(
+      Code,
+      Name,
+      Continent,
+      Region,
+      Population,
+      Capital
+    );
+    return country;
+  }
+
   async getCities() {
     try {
       // Fetch cities from database
@@ -45,9 +62,9 @@ export default class DatabaseService {
       const sum = await this.conn.execute(
         "SELECT SUM(Population) FROM country"
       );
-      const total = sum[0][0]['SUM(Population)'];
+      const total = sum[0][0]["SUM(Population)"];
       const ans = Number(total).toLocaleString();
-    return ans;
+      return ans;
     }
     return 0;
   }

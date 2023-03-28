@@ -63,6 +63,14 @@ app.get("/cities/:id", async (req, res) => {
   return res.render("city", { city });
 });
 
+// Single country page
+app.get("/single-country/:code", async function (req, res) {
+  var countryCode = req.params.code;
+  // Create a country class with the code passed
+  const country = await db.getCountry(countryCode);
+  return res.render("country", { country });
+});
+
 // Returns JSON array of cities
 app.get("/api/cities", async (req, res) => {
   const [rows, fields] = await db.getCities();
