@@ -1,7 +1,21 @@
-# se-git-demo
-Demonstration on how to use git collaboratively
+# Sprint 3
+The aim of this Sprint is to have a working prototype of your application, showing good progress in the technical deliverables of the project, and providing a proof of concept for your idea.
 
-Add a change
-Another change
-change more things
-Add another change
+The following must be in place:
+
+- Suitable unit tests defined
+
+- Suitable integration tests defined
+
+- Tests running on Travis CI/Circle CI/...
+
+- Updated task board of user stories showing progress in the technical deliverables
+
+- Github repository showing work from all members of the team
+
+- Implementation progress towards final version of application:
+- 
+      -> Database design
+      -> Database implementation with pre-filled data
+      -> Some HTML pages available generated from PUG, perhaps with some static content
+      -> At least some dynamic content being pulled from your database to your templates via Pug- concentrate on views of your data
