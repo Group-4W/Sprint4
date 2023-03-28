@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.7
+
 jobs:
   start:
     build:
@@ -13,4 +16,7 @@ jobs:
 workflows:
   my-workflow:                                # Name of the workflow. You can additional workflows below.
     jobs:                                     # The jobs to run as part of this workflow
+      - node/test:
+        version: "16.10"
+        pkg-manager: npm
       - start                             # Example 'hello world' job.
