@@ -1,0 +1,1 @@
+Make sure to have 'world.sql' in this directory with that name, and do not upload that sql file to github
