@@ -9,7 +9,7 @@ The following must be in place:
 
 - Tests running on Travis CI/Circle CI/...
 
-- Updated task board of user stories showing progress in the technical deliverables(done)
+- Updated task board of user stories showing progress in the technical deliverables(done)by Aleksandros
 
 - Github repository showing work from all members of the team
 
