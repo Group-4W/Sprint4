@@ -13,10 +13,10 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       build:
-       working_directory: ~/src
-       docker:
-         - image: cimg/node:lts
-       steps:
-         - checkout:
-             path: ~/src
-         - run: npm install
+        working_directory: ~/src
+        docker:
+          - image: cimg/node:lts
+        steps:
+          - checkout:
+              path: ~/src
+          - run: npm install
