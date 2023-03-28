@@ -8,7 +8,7 @@ jobs:
     build:
       working_directory: ~/src
       docker:
-        - image: src/dockerfile               # the primary container, where your job's commands are run
+        - image: cimg/node:lts               # the primary container, where your job's commands are run
       steps:
         - checkout:                              # check out the code in the project directory
           path: ~/src
