@@ -11,15 +11,15 @@ jobs:
         - image: circleci/node:8.0
         - image: docker:17.09.1-ce-git  # enable the docker build support
       working_directory: ~/repo
-        steps:
-          - checkout
-          - setup_remote_docker
-          # Download and cache dependencies
-          - restore_cache:
-            keys:
-              - v1-dependencies-{{ checksum "package.json" }}
-              # fallback to using the latest cache if no exact match is found
-              - v1-dependencies-
+      steps:
+        - checkout
+        - setup_remote_docker
+        # Download and cache dependencies
+        - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
     
         # clearing the cache
         - run: npm cache clear --force
