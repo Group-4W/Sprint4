@@ -1,5 +1,5 @@
 version: 2.1
-  jobs:
+  jobs: 
     build:
       branches:
         only:
@@ -7,7 +7,7 @@ version: 2.1
           - development
         docker:
           # specify the version you desire here
-          - image: circleci/node:lts
+          - image: circleci/node:8.0
           - image: docker:17.09.1-ce-git  # enable the docker build support
        working_directory: ~/repo
          steps:
