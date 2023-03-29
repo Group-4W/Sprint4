@@ -32,7 +32,6 @@ jobs:
           command: |
             mkdir -p ~/Sprint3/src/caches
             docker save -o ~/Sprint3/src/caches/app.tar app
-      - run: npm install
       - store_test_results:
           path: test-results
       #- run: node test.mjs
