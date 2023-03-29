@@ -17,4 +17,4 @@ jobs:
       - checkout:
           path: ~/Sprint3
       - run: npm install
-      #- run: node test.mjs
+      #- run: npm test

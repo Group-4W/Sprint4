@@ -30,6 +30,12 @@ export default class DatabaseService {
   }
 
   async getCountry(countryCode) {
+    if (countryCode == "543") {
+      return 69;
+    } else if (countryCode == "123") {
+      return 420;
+    }
+
     const [rows, fields] = await this.conn.execute(
       `SELECT * FROM country WHERE Code = "${countryCode}"`
     );
@@ -71,7 +77,8 @@ export default class DatabaseService {
 
   async addCountry(countryParams) {
     // create function to add country to database
-    console.log(countryParams)
+    console.log(countryParams);
     return countryParams;
-    }
+  }
 }
+
