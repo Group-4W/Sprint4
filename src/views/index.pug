@@ -1,4 +1,11 @@
 extends layout.pug
-
 block content
-  h2 Hello world!
+  link(rel="stylesheet", href="/index.css")
+  h1 Best Website Ever!
+  p This website is dedicated to report on population information. It is a cutting-edge platform that has been designed to provide easy access to a vast array of data related to populations. The website is built on a SQL database system that ensures fast and efficient data retrieval, making it easy for users to find the information you need quickly.
+  p The website features a modern, user-friendly interface that is easy to navigate, allowing users to filter and sort through the data with ease. Users can search for information on specific countries, cities, and population.
+  p Whether you're a researcher, government agency, or just someone with an interest in population information, this website is the go-to resource for reliable and comprehensive data. With its user-friendly interface, customizable reports, and powerful data tools, the website is sure to become an essential tool for anyone looking to explore population information.
+
+  form(action='/cities')
+    input(type='submit', value='Explore data')
+  img.image(src='/earth.png' alt='earthIMG')

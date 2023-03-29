@@ -12,23 +12,25 @@ app.set("view engine", "pug");
 
 // Serve assets from 'static' folder
 app.use(express.static("static"));
+app.use(express.static("images"));
+app.use(express.static("fonts"));
+app.use(express.urlencoded({ extended: true }));
 
 const db = await DatabaseService.connect();
 const { conn } = db;
 
 /* Landing route */
 app.get("/", (req, res) => {
+  res.render("signin");
+});
+
+app.get("/index", (req, res) => {
   res.render("index");
 });
 
 // Sample API route
 app.get("/ping", (req, res) => {
   res.send("pong");
-});
-
-// Landing route
-app.get("/", (req, res) => {
-  res.render("index");
 });
 
 // Gallery route
@@ -38,7 +40,16 @@ app.get("/gallery", (req, res) => {
 
 // About route
 app.get("/about", (req, res) => {
-  res.render("about", { title: "Boring about page" });
+  res.render("about");
+});
+
+// world population route
+app.get("/cities/population/:place", async (req, res) => {
+  const placeName = req.params.place;
+  const population = await db.getPopulation(placeName);
+  if (placeName == "world") {
+    res.render("worldpop", { population });
+  }
 });
 
 app.get("/cities", async (req, res) => {
@@ -47,16 +58,43 @@ app.get("/cities", async (req, res) => {
   return res.render("cities", { rows, fields });
 });
 
-app.get('/cities/:id', async (req, res) => {
+app.get("/cities/:id", async (req, res) => {
   const cityId = req.params.id;
   const city = await db.getCity(cityId);
-  return res.render('city', { city });
-})
+  return res.render("city", { city });
+});
+
+// Single country page
+app.get("/single-country/:code", async function (req, res) {
+  var countryCode = req.params.code;
+  // Create a country class with the code passed
+  const country = await db.getCountry(countryCode);
+  return res.render("country", { country });
+});
 
 // Returns JSON array of cities
 app.get("/api/cities", async (req, res) => {
   const [rows, fields] = await db.getCities();
   return res.send(rows);
+});
+
+// Returns JSON array of cities
+app.get("/addcountry", async (req, res) => {
+  return res.render('addcountry');
+});
+
+app.post("/add-country", async function (req, res) {
+  // Get the submitted values
+  var params = req.body;
+  // Adding a try/catch block which will be useful later when we add to the database
+  try {
+    await db.addCountry(params).then((result) => {
+      // Just a little output for now
+      res.send("data should be added");
+    });
+  } catch (err) {
+    console.error(`Error while adding country `, err.message);
+  }
 });
 
 // Run server!
