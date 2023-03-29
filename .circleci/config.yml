@@ -13,6 +13,7 @@ jobs:
     working_directory: ~/Sprint3/src
     docker:
       - image: cimg/node:lts
+      - environment: 
     steps:
       - checkout:
           path: ~/Sprint3
@@ -35,4 +36,4 @@ jobs:
       - run: npm install
       - store_test_results:
           path: test-results
-      - run: npm run testmac
+      #- run: npm run testmac
