@@ -1,6 +1,5 @@
 import DatabaseService from "./services/database.service.mjs";
 const db = await DatabaseService.connect();
-const { conn } = db;
 
 describe("getCountry of mexico", () => {
   it("should return a 98881000", async () => {

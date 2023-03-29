@@ -82,3 +82,5 @@ export default class DatabaseService {
   }
 }
 
+
+module.exports = sum;
