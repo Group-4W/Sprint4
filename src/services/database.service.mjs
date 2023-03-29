@@ -68,4 +68,10 @@ export default class DatabaseService {
     }
     return 0;
   }
+
+  async addCountry(countryParams) {
+    // create function to add country to database
+    console.log(countryParams)
+    return countryParams;
+    }
 }

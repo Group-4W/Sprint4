@@ -5,11 +5,8 @@ services:
     image: mysql
     volumes:
       - ./data/:/docker-entrypoint-initdb.d/
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=world
+    env_file:
+      - ./.env
     ports:
       - 3306:3306
 
@@ -22,3 +19,11 @@ services:
       - DATABASE_HOST=database
     ports:
       - 3000:3000
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "8081:80"

@@ -14,6 +14,7 @@ app.set("view engine", "pug");
 app.use(express.static("static"));
 app.use(express.static("images"));
 app.use(express.static("fonts"));
+app.use(express.urlencoded({ extended: true }));
 
 const db = await DatabaseService.connect();
 const { conn } = db;
@@ -75,6 +76,25 @@ app.get("/single-country/:code", async function (req, res) {
 app.get("/api/cities", async (req, res) => {
   const [rows, fields] = await db.getCities();
   return res.send(rows);
+});
+
+// Returns JSON array of cities
+app.get("/addcountry", async (req, res) => {
+  return res.render('addcountry');
+});
+
+app.post("/add-country", async function (req, res) {
+  // Get the submitted values
+  var params = req.body;
+  // Adding a try/catch block which will be useful later when we add to the database
+  try {
+    await db.addCountry(params).then((result) => {
+      // Just a little output for now
+      res.send("data should be added");
+    });
+  } catch (err) {
+    console.error(`Error while adding country `, err.message);
+  }
 });
 
 // Run server!
