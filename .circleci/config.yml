@@ -10,11 +10,11 @@ orbs:
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 jobs:
   build:
-    working_directory: ~/Sprint3/src
+    working_directory: ~/src
     docker:
       - image: cimg/node:lts
     steps:
       - checkout:
-          path: ~/Sprint3
+          path: ~/src
       - run: npm install
       #- run: node test.mjs
