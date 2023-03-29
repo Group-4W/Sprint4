@@ -17,6 +17,7 @@ jobs:
       - checkout:
           path: ~/Sprint3
       - setup_remote_docker
+      - run: npm install
       - run:
           name: Load Docker image layer cache
           command: |
