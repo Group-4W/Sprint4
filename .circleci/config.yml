@@ -16,5 +16,6 @@ jobs:
     steps:
       - checkout:
           path: ~/Sprint3
+      - setup_remote_docker
       - run: npm install
-      #- run: npm test
+      #- run: node test.mjs
