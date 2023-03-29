@@ -2,7 +2,11 @@ html,
 body {
   font-size: 14px;
   font-family: "Segoe UI", sans-serif;
-  background-color: #eeeeee;
+  background: #9053c7;
+  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
   margin: 0;
   padding: 0;
 }
