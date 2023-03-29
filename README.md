@@ -22,3 +22,5 @@ The following must be in place:
       -> Database implementation with pre-filled data
       -> Some HTML pages available generated from PUG, perhaps with some static content
       -> At least some dynamic content being pulled from your database to your templates via Pug- concentrate on views of your data
+
+

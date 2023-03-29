@@ -18,12 +18,12 @@ describe("getCity", () => {
   it("should return Kabul", async () => {
     // call asyncFunction and test the result
     const result = await db.getCity(1);
-    expect(result).toEqual("Kabul");
+    expect(result.name).toEqual("Kabul");
   });
   it("should return Buenos Aires", async () => {
     // call asyncFunction and test the result
     const result = await db.getCity(69);
-    expect(result).toEqual("Buenos Aires");
+    expect(result.name).toEqual("Buenos Aires");
   });
 });
 
@@ -31,6 +31,6 @@ describe("getPopulation", () => {
   it("should return the world population a big number like 6billion", async () => {
     // call asyncFunction and test the result
     const result = await db.getPopulation("world");
-    expect(result.population).toEqual("6,078,749,450");
+    expect(result).toEqual("6,078,749,450");
   });
 });

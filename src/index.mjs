@@ -88,7 +88,7 @@ app.post("/add-country", async function (req, res) {
   var params = req.body;
   // Adding a try/catch block which will be useful later when we add to the database
   try {
-    await db.addCountry(params).then((result) => {
+    await db.addCountry(params).then(result => {
       // Just a little output for now
       res.send("data should be added");
     });
