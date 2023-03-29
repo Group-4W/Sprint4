@@ -27,4 +27,6 @@ jobs:
           command: |
             docker build --cache-from=app -t app .
       - run: npm install
+      - store_test_results:
+          path: test-results
       #- run: node test.mjs
