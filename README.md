@@ -1,24 +1,17 @@
 # Zube link
 https://zube.io/group4w/group-4w-coursework/w/workspace-1/kanban
 
-# Sprint 3
-The aim of this Sprint is to have a working prototype of your application, showing good progress in the technical deliverables of the project, and providing a proof of concept for your idea.
+# Sprint 4
+The aim of this Sprint is to deliver the final version of your application. The final version of
+your application will be pulled automatically from GitHub. The final submission will be
+assessed based on the following criteria.
 
 The following must be in place:
 
-- Suitable unit tests defined
-
-- Suitable integration tests defined
-
-~- Tests running on Travis CI/Circle CI/...~
-
-~- Updated task board of user stories showing progress in the technical deliverables(done by Aleksandros)~
-
-- Github repository showing work from all members of the team
-
-- Implementation progress towards final version of application:
-- 
-      -> Database design
-      -> Database implementation with pre-filled data
-      -> Some HTML pages available generated from PUG, perhaps with some static content
-      -> At least some dynamic content being pulled from your database to your templates via Pug- concentrate on views of your data
+- [ ]  Overall application quality and success at meeting the aims set out during the design process
+- [ ]  Metrics from GitHub: used to assess individual contribution
+- [ ]  Application deployable using a docker-compose file, data can be provided separately
+- [ ]  Final version of the task board and project requirements met
+- [ ]  Deployment working
+- [ ]  Bug reporting system set-up
+- [ ]  A group report (**maximum 10 pages**), where you need to present your work as a team
