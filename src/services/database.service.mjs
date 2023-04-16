@@ -81,6 +81,3 @@ export default class DatabaseService {
     return countryParams;
   }
 }
-
-
-module.exports = sum;
