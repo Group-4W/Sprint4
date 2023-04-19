@@ -30,12 +30,6 @@ export default class DatabaseService {
   }
 
   async getCountry(countryCode) {
-    if (countryCode == "543") {
-      return 69;
-    } else if (countryCode == "123") {
-      return 420;
-    }
-
     const [rows, fields] = await this.conn.execute(
       `SELECT * FROM country WHERE Code = "${countryCode}"`
     );
@@ -63,6 +57,61 @@ export default class DatabaseService {
     }
   }
 
+  async getCountries(place, N) {
+    if (place == "the world") {
+      const num = Number(N);
+      if (!isNaN(N) && num > -1) {
+        try {
+          // Fetch cities from database
+          const data = await this.conn.execute(
+            `SELECT * FROM country ORDER BY Population DESC LIMIT ${num}`
+          );
+          return data;
+        } catch (err) {
+          // Handle error...
+          console.error(err);
+          return undefined;
+        }
+      }
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT * FROM country ORDER BY Population DESC`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    }
+    const num = Number(N);
+    if (!isNaN(N) && num > -1) {
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT * FROM country WHERE Region = "${place}" OR Continent = "${place}" ORDER BY Population DESC LIMIT ${num}`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    }
+    try {
+      // Fetch cities from database
+      const data = await this.conn.execute(
+        `SELECT * FROM country WHERE Region = "${place}" OR Continent = "${place}" ORDER BY Population DESC`
+      );
+      return data;
+    } catch (err) {
+      // Handle error...
+      console.error(err);
+      return undefined;
+    }
+  }
+
   async getPopulation(place) {
     if (place == "world") {
       const sum = await this.conn.execute(
@@ -80,7 +129,10 @@ export default class DatabaseService {
     console.log(countryParams);
     return countryParams;
   }
+
+  async updateCountry(countryParams) {
+    // create function to add country to database
+    console.log(countryParams);
+    return countryParams;
+  }
 }
-
-
-module.exports = sum;

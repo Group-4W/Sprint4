@@ -1,0 +1,41 @@
+//- extends layout
+
+//- block head
+//-   link(rel="stylesheet", href="/cities.css")
+
+//- block content 
+//-     h1 countries
+//-     h2 #{rtn}
+//-     p - [ ]  All the countries in #{rtn} organised by largest population to smallest
+//-     p - [ ]  The top `N` populated countries in #{rtn} where `N` is provided by the user
+
+//-     table
+//-     thead
+//-       th.text-center 🏴
+//-       th Country
+//-       th.number Population
+//-     tbody
+//-       each row in rows
+//-         tr
+//-           td.fit #{row.Code}
+//-           td #{row.Name}
+//-           - const population = new Intl.NumberFormat().format(row.Population);
+//-           td.fit.number #{population}
+
+extends layout.pug
+
+block head
+  link(rel="stylesheet", href="/cities.css")
+
+block content
+  h2 Countries in #{place}
+  table
+    thead
+      th Country
+      th.number Population
+    tbody
+      each row in rows
+        tr
+          td #{row.Name}
+          - const population = new Intl.NumberFormat().format(row.Population);
+          td.fit.number #{population}
