@@ -14,6 +14,4 @@ export default class Country {
     this.population = population;
     this.capital = capital;
   }
-
-  
 }

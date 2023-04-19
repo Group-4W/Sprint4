@@ -1,0 +1,32 @@
+extends layout.pug
+block content
+  link(rel="stylesheet", href="/index.css")
+  h1 Best Website Ever!
+  p This website is dedicated to report on population information. It is a cutting-edge platform that has been designed to provide easy access to a vast array of data related to populations. The website is built on a SQL database system that ensures fast and efficient data retrieval, making it easy for users to find the information you need quickly.
+  p The website features a modern, user-friendly interface that is easy to navigate, allowing users to filter and sort through the data with ease. Users can search for information on specific countries, cities, and population.
+  p Whether you're a researcher, government agency, or just someone with an interest in population information, this website is the go-to resource for reliable and comprehensive data. With its user-friendly interface, customizable reports, and powerful data tools, the website is sure to become an essential tool for anyone looking to explore population information.
+
+  p /countries type 'the world', a continent, or a region.
+  form(action='/countries', method='POST')
+    input(type="text" name="place" placeholder="Enter 'the world', a continent or region.")
+    input(type="text" name="N" placeholder="Enter how many to display, leave blank to get all.")
+    input(type='submit' value='Submit')
+
+  a(href='/cities/place') /cities/:place
+  a(href='/capitals/place') /capitals/:place
+  a(href='/city-population/place') /city-population/:place
+  a(href='/population/place/nameid') /population/place/:nameid
+  a(href='/language') language
+  a(href='/country-report/nameid') /country-report/:nameid
+  a(href='/capital-report/nameid') /capital-report/:nameid
+  a(href='/city-report/nameid') /city-report/:nameid
+  p /population-report/:place/:nameid
+  form(action='/population', method='POST')
+    input(type="text" name="place" placeholder="Enter 'the world', a continent or region.")
+    input(type="text" name="nameid" placeholder="Enter nameid")
+    input(type='submit' value='Submit')
+
+  a(href='/add/table') /add/:table
+  a(href='/update/table') /update/:table
+
+  img.image(src='https://static.vecteezy.com/system/resources/previews/009/314/440/original/earth-globe-clip-art-vector-illustration-isolated-free-png.png' alt='earthIMG')
