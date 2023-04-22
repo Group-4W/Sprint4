@@ -20,13 +20,8 @@ export default class DatabaseService {
     return new DatabaseService(conn);
   }
 
-  async getCity(cityId) {
-    const [rows, fields] = await this.conn.execute(
-      `SELECT * FROM city WHERE id = ${cityId}`
-    );
-    const { ID, Name, CountryCode, District, Population } = rows[0];
-    const city = new City(ID, Name, CountryCode, District, Population);
-    return city;
+  async runsql(sql) {
+    return await this.conn.execute(sql);
   }
 
   async getCountry(countryCode) {
@@ -45,16 +40,13 @@ export default class DatabaseService {
     return country;
   }
 
-  async getCities() {
-    try {
-      // Fetch cities from database
-      const data = await this.conn.execute("SELECT * FROM `city`");
-      return data;
-    } catch (err) {
-      // Handle error...
-      console.error(err);
-      return undefined;
-    }
+  async getCity(cityId) {
+    const [rows, fields] = await this.conn.execute(
+      `SELECT * FROM city WHERE id = ${cityId}`
+    );
+    const { ID, Name, CountryCode, District, Population } = rows[0];
+    const city = new City(ID, Name, CountryCode, District, Population);
+    return city;
   }
 
   async getCountries(place, N) {
@@ -112,6 +104,168 @@ export default class DatabaseService {
     }
   }
 
+  async getCities(place, N) {
+    if (place == "the world") {
+      const num = Number(N);
+      if (!isNaN(N) && num > -1) {
+        try {
+          // Fetch cities from database
+          const data = await this.conn.execute(
+            `SELECT * FROM city ORDER BY Population DESC LIMIT ${num}`
+          );
+          return data;
+        } catch (err) {
+          // Handle error...
+          console.error(err);
+          return undefined;
+        }
+      }
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT * FROM city ORDER BY Population DESC`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    }
+    const num = Number(N);
+    if (!isNaN(N) && num > -1) {
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT * FROM city WHERE District = "${place}" OR CountryCode IN (SELECT Code FROM country WHERE Region = "${place}" OR Continent = "${place}" OR Name = "${place}") ORDER BY Population DESC LIMIT ${num}`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    }
+    try {
+      // Fetch cities from database
+      const data = await this.conn.execute(
+        `SELECT * FROM city WHERE District = "${place}" OR CountryCode IN (SELECT Code FROM country WHERE Region = "${place}" OR Continent = "${place}" OR Name = "${place}") ORDER BY Population DESC`
+      );
+
+      return data;
+    } catch (err) {
+      // Handle error...
+      console.error(err);
+      return undefined;
+    }
+  }
+
+  async getCapitals(place, N) {
+    if (place == "the world") {
+      const num = Number(N);
+      if (!isNaN(N) && num > -1) {
+        try {
+          // Fetch cities from database
+          const data = await this.conn.execute(
+            `SELECT city.* FROM city JOIN country ON city.ID = country.Capital ORDER BY Population DESC LIMIT ${num}`
+          );
+          return data;
+        } catch (err) {
+          // Handle error...
+          console.error(err);
+          return undefined;
+        }
+      }
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT city.* FROM city JOIN country ON city.ID = country.Capital ORDER BY Population DESC`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    }
+    const num = Number(N);
+    if (!isNaN(N) && num > -1) {
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT city.* FROM city JOIN country ON city.ID = country.Capital WHERE Region = "${place}" OR Continent = "${place}" ORDER BY Population DESC LIMIT ${num}`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    }
+    try {
+      // Fetch cities from database
+      const data = await this.conn.execute(
+        `SELECT city.* FROM city JOIN country ON city.ID = country.Capital WHERE Region = "${place}" OR Continent = "${place}" ORDER BY Population DESC`
+      );
+      return data;
+    } catch (err) {
+      // Handle error...
+      console.error(err);
+      return undefined;
+    }
+  }
+
+  async getCityPopulation(place) {
+    if (place == "country") {
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT * FROM city ORDER BY Population DESC`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    } else if (place == "continent") {
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT * FROM city ORDER BY Population DESC`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    } else if (place == "region") {
+      try {
+        // Fetch cities from database
+        const data = await this.conn.execute(
+          `SELECT * FROM city ORDER BY Population DESC`
+        );
+        return data;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    }
+    try {
+      // Fetch cities from database
+      const data = await this.conn.execute(
+        `SELECT * FROM city ORDER BY Population DESC`
+      );
+      return data;
+    } catch (err) {
+      // Handle error...
+      console.error(err);
+      return undefined;
+    }
+  }
+
   async getPopulation(place) {
     if (place == "world") {
       const sum = await this.conn.execute(
@@ -127,6 +281,15 @@ export default class DatabaseService {
   async addCountry(countryParams) {
     // create function to add country to database
     console.log(countryParams);
+    console.log(countryParams.capital);
+    console.log(countryParams.code);
+    console.log(countryParams.name);
+    const data = await this.conn.execute(
+      `INSERT IGNORE INTO country (Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2)
+                 VALUES ('${countryParams.code}', '${countryParams.name}', '${countryParams.continent}', '${countryParams.region}', '${countryParams.surfacearea}', '${countryParams.indepyear}', '${countryParams.population}', '${countryParams.lifeexpectancy}', '${countryParams.gnp}', '${countryParams.gnpold}', '${countryParams.localname}', '${countryParams.governmentform}', '${countryParams.headofstate}', '${countryParams.capital}', '${countryParams.code2}')`
+    );
+
+    // Execute Query
     return countryParams;
   }
 

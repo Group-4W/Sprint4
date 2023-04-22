@@ -4,14 +4,16 @@ block head
   link(rel="stylesheet", href="/cities.css")
 
 block content
-  h2 Countries in #{place}
+  h2 City Population by #{place}
   table
     thead
-      th Country
-      th.number Population
+      th #{place}
+      th.number City Population
+      th.number Non-City Population
     tbody
       each row in rows
         tr
           td #{row.Name}
           - const population = new Intl.NumberFormat().format(row.Population);
+          td.fit.number #{population}
           td.fit.number #{population}

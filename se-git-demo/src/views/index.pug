@@ -6,15 +6,29 @@ block content
   p The website features a modern, user-friendly interface that is easy to navigate, allowing users to filter and sort through the data with ease. Users can search for information on specific countries, cities, and population.
   p Whether you're a researcher, government agency, or just someone with an interest in population information, this website is the go-to resource for reliable and comprehensive data. With its user-friendly interface, customizable reports, and powerful data tools, the website is sure to become an essential tool for anyone looking to explore population information.
 
-  p /countries type 'the world', a continent, or a region.
+  p /countries type 'the world', a continent, or region.
   form(action='/countries', method='POST')
-    input(type="text" name="place" placeholder="Enter 'the world', a continent or region.")
-    input(type="text" name="N" placeholder="Enter how many to display, leave blank to get all.")
+    input(type="text" name="place" placeholder="Enter 'the world', a continent, or region.")
+    input(type="text" name="N" placeholder="Enter how many to display, type all for all.")
     input(type='submit' value='Submit')
 
-  a(href='/cities/place') /cities/:place
-  a(href='/capitals/place') /capitals/:place
-  a(href='/city-population/place') /city-population/:place
+  p /cities type 'the world', a continent, region, country, or district.
+  form(action='/cities', method='POST')
+    input(type="text" name="place" placeholder="Enter 'the world', a continent, region, country, or district.")
+    input(type="text" name="N" placeholder="Enter how many to display, type all for all.")
+    input(type='submit' value='Submit')
+
+  p /capitals type 'the world', a continent, or region.
+  form(action='/capitals', method='POST')
+    input(type="text" name="place" placeholder="Enter 'the world', a continent, or region.")
+    input(type="text" name="N" placeholder="Enter how many to display, type all for all.")
+    input(type='submit' value='Submit')
+
+  p /city-population type 'country, 'continent', or 'region'.
+  form(action='/city-population', method='POST')
+    input(type="text" name="place" placeholder="Enter 'country, 'continent', or 'region'.")
+    input(type='submit' value='Submit')
+
   a(href='/population/place/nameid') /population/place/:nameid
   a(href='/language') language
   a(href='/country-report/nameid') /country-report/:nameid
