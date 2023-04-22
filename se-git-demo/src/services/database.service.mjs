@@ -217,11 +217,14 @@ export default class DatabaseService {
 
   async getCityPopulation(place) {
     if (place == "country") {
+      //get list of countries in the world. For each country, sum the population of the cities in that country. For each country, substract their population with the sum of the population of the cities in that country.
       try {
         // Fetch cities from database
-        const data = await this.conn.execute(
-          `SELECT * FROM city ORDER BY Population DESC`
-        );
+        const data = await this.conn
+          .execute(`SELECT c.Name, c.Population, SUM(ci.Population) as cityPopulation
+        FROM country c
+        JOIN city ci ON c.Code = ci.CountryCode
+        GROUP BY c.Code`);
         return data;
       } catch (err) {
         // Handle error...
@@ -231,9 +234,11 @@ export default class DatabaseService {
     } else if (place == "continent") {
       try {
         // Fetch cities from database
-        const data = await this.conn.execute(
-          `SELECT * FROM city ORDER BY Population DESC`
-        );
+        const data = await this.conn
+          .execute(`SELECT c.Continent AS Name, SUM(ci.Population) AS cityPopulation, SUM(c.Population) AS Population
+          FROM country c
+          JOIN city ci ON c.Code = ci.CountryCode
+          GROUP BY c.Continent`);
         return data;
       } catch (err) {
         // Handle error...
@@ -243,9 +248,11 @@ export default class DatabaseService {
     } else if (place == "region") {
       try {
         // Fetch cities from database
-        const data = await this.conn.execute(
-          `SELECT * FROM city ORDER BY Population DESC`
-        );
+        const data = await this.conn
+          .execute(`SELECT c.Region AS Name, SUM(ci.Population) AS cityPopulation, SUM(c.Population) AS Population
+          FROM country c
+          JOIN city ci ON c.Code = ci.CountryCode
+          GROUP BY c.Region`);
         return data;
       } catch (err) {
         // Handle error...
@@ -256,7 +263,7 @@ export default class DatabaseService {
     try {
       // Fetch cities from database
       const data = await this.conn.execute(
-        `SELECT * FROM city ORDER BY Population DESC`
+        `SELECT * FROM city WHERE Name = "asdwinsksla"`
       );
       return data;
     } catch (err) {
@@ -267,15 +274,36 @@ export default class DatabaseService {
   }
 
   async getPopulation(place) {
-    if (place == "world") {
+    if (place == "the world") {
+      try {
+        // Fetch cities from database
+        const sum = await this.conn.execute(
+          "SELECT SUM(Population) FROM country"
+        );
+        const total = sum[0][0]["SUM(Population)"];
+        const ans = Number(total).toLocaleString();
+        return ans;
+      } catch (err) {
+        // Handle error...
+        console.error(err);
+        return undefined;
+      }
+    }
+    try {
+      // Fetch cities from database
       const sum = await this.conn.execute(
-        "SELECT SUM(Population) FROM country"
+        `SELECT SUM(c.Population) FROM city c
+        JOIN country co ON c.CountryCode = co.Code
+        WHERE co.Continent = "${place}" OR co.Region = "${place}" OR co.Name = "${place}" OR c.District = "${place}" OR c.Name = "${place}"`
       );
-      const total = sum[0][0]["SUM(Population)"];
+      const total = sum[0][0]["SUM(c.Population)"];
       const ans = Number(total).toLocaleString();
       return ans;
+    } catch (err) {
+      // Handle error...
+      console.error(err);
+      return undefined;
     }
-    return 0;
   }
 
   async addCountry(countryParams) {

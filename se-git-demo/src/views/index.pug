@@ -29,12 +29,18 @@ block content
     input(type="text" name="place" placeholder="Enter 'country, 'continent', or 'region'.")
     input(type='submit' value='Submit')
 
-  a(href='/population/place/nameid') /population/place/:nameid
+  p /population type 'the world', a continent, region, country, district, or city.
+  form(action='/population', method='POST')
+    input(type="text" name="place" placeholder="Enter 'the world', a continent, region, country, district, or city.")
+    input(type='submit' value='Submit')
+
+  a(href='/population/place/nameid') /population
   a(href='/language') language
-  a(href='/country-report/nameid') /country-report/:nameid
-  a(href='/capital-report/nameid') /capital-report/:nameid
-  a(href='/city-report/nameid') /city-report/:nameid
-  p /population-report/:place/:nameid
+  a(href='/country-report/nameid') /country-report
+  a(href='/capital-report/nameid') /capital-report
+  a(href='/city-report/nameid') /city-report
+
+  p /population-report
   form(action='/population', method='POST')
     input(type="text" name="place" placeholder="Enter 'the world', a continent or region.")
     input(type="text" name="nameid" placeholder="Enter nameid")

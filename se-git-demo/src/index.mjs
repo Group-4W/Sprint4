@@ -73,8 +73,9 @@ app.post("/city-population", async function (req, res) {
 // world population route
 app.post("/population", async function (req, res) {
   const params = req.body;
-  const population = await db.getPopulation(params.place);
-  res.render("population", { population });
+  const place = params.place;
+  const population = await db.getPopulation(place);
+  res.render("population", { population, place });
 });
 
 // Single country page

@@ -8,12 +8,19 @@ block content
   table
     thead
       th #{place}
+      th.number Population
       th.number City Population
       th.number Non-City Population
     tbody
       each row in rows
         tr
           td #{row.Name}
+
           - const population = new Intl.NumberFormat().format(row.Population);
           td.fit.number #{population}
-          td.fit.number #{population}
+
+          - const citypopulation = new Intl.NumberFormat().format(row.cityPopulation);
+          td.fit.number #{citypopulation}
+
+          - const noncitypopulation = new Intl.NumberFormat().format(row.Population - row.cityPopulation);
+          td.fit.number #{noncitypopulation}
