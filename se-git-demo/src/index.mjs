@@ -66,8 +66,8 @@ app.post("/city-population", async function (req, res) {
   // Get the submitted values
   var params = req.body;
   const place = params.place;
-  const [rows, fields] = await db.getCityPopulation(place);
-  res.render("city-population", { rows, fields, place });
+  const rows = await db.getCityPopulation(place);
+  res.render("city-population", { rows, place });
 });
 
 // world population route
@@ -78,18 +78,59 @@ app.post("/population", async function (req, res) {
   res.render("population", { population, place });
 });
 
+// world population route
+app.post("/language", async function (req, res) {
+  const [rows, fields] = await db.getLanguage();
+  res.render("language", { rows, fields });
+});
+
 // Single country page
-app.get("/country-report/:nameid", async function (req, res) {
-  var countryCode = req.params.nameid;
+app.post("/country-report", async function (req, res) {
+  var params = req.body;
+  var place = params.place;
   // Create a country class with the code passed
-  const country = await db.getCountry(countryCode);
+  const country = await db.getCountry(place);
   return res.render("country-report", { country });
 });
 
-app.get("/city-report/:nameid", async (req, res) => {
-  const cityId = req.params.nameid;
-  const city = await db.getCity(cityId);
+app.post("/city-report", async function (req, res) {
+  var params = req.body;
+  var place = params.place;
+  // Create a country class with the code passed
+  const city = await db.getCity(place);
   return res.render("city-report", { city });
+});
+
+app.post("/capital-report", async function (req, res) {
+  var params = req.body;
+  var place = params.place;
+  // Create a country class with the code passed
+  const city = await db.getCity(place);
+  return res.render("capital-report", { city });
+});
+
+app.post("/population-report", async function (req, res) {
+  var params = req.body;
+  var place = params.place;
+  // Create a country class with the code passed
+  const [data, fields] = await db.getPopulationReport(place);
+  const name = data.Name;
+  const pop = data.Population;
+  const citypop = data.CityPopulation;
+
+  const citypopper = (citypop * 100) / pop;
+  const noncitypop = pop - citypop;
+  const noncitypopper = (noncitypop * 100) / pop;
+  
+  return res.render("population-report", {
+    name,
+    pop,
+    citypop,
+    citypopper,
+    noncitypop,
+    noncitypopper,
+    place,
+  });
 });
 
 app.get("/addcountry", async (req, res) => {
@@ -116,7 +157,9 @@ app.get("/register", function (req, res) {
   res.render("register");
 });
 // Login
-app.get("/login", function (req, res) {
+app.get("/login", async function (req, res) {
+  const [rows, field] = await db.getEmails();
+  console.log(rows);
   res.render("login");
 });
 
@@ -127,10 +170,11 @@ app.get("/account", async (req, res) => {
   if (!auth) {
     return res.redirect("/login");
   }
-  const sql = `SELECT id, email FROM user WHERE Users.id = ${userId}`;
+  const sql = `SELECT id, email FROM user WHERE user.id = ${userId}`;
   const [results, cols] = await db.runsql(sql);
-  const user = results[0];
-  res.render("account", { user });
+  const result = results[0];
+  const email = result.email;
+  res.render("account", { email });
 });
 
 app.post("/api/register", async (req, res) => {
@@ -181,8 +225,18 @@ app.post("/api/login", async (req, res) => {
 });
 
 // Logout
-app.get("/logout", function (req, res) {
+app.post("/logout", async function (req, res) {
   req.session.destroy();
+  res.redirect("/login");
+});
+
+app.post("/delete", async function (req, res) {
+  const { auth, userId } = req.session;
+  const sql = `SELECT id, email FROM user WHERE user.id = ${userId}`;
+  const [results, cols] = await db.runsql(sql);
+  const user = results[0];
+  const id = user.id;
+  await db.deleteAccount(id);
   res.redirect("/login");
 });
 

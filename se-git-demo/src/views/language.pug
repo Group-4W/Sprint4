@@ -1,0 +1,20 @@
+extends layout.pug
+
+block head
+  link(rel="stylesheet", href="/cities.css")
+
+block content
+  h2 Languages
+  table
+    thead
+      th Language
+      th.number Population
+      th.number Percentage
+    tbody
+      each row in rows
+        tr
+          td #{row.LanguageName}
+          - const population = new Intl.NumberFormat().format(row.Speakers);
+          td.fit.number #{population}
+          - const percentage = new Intl.NumberFormat().format(row.Percent);
+          td.fit.number #{percentage}

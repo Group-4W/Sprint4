@@ -1,7 +1,12 @@
 extends layout
 
 block content
- h1 Welcome #{user}
+   h1 Welcome #{email}
+   a(href='/add/table') /add/:table
+   a(href='/update/table') /update/:table
 
- form(action='/logout', method='POST')
-    input(type='submit' value='Logout')
+   form(action='/logout', method='POST')
+      input(type='submit' value='Logout')
+ 
+   form(action='/delete', method='POST')
+      input(type='submit' value='Delete')

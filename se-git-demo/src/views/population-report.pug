@@ -1,0 +1,11 @@
+extends layout
+
+block content 
+    h1 Population Report
+    h2 Name: #{place}
+    - const popd = new Intl.NumberFormat().format(pop);
+    h2 Population: #{popd}
+    - const citypopd = new Intl.NumberFormat().format(citypop);
+    h2 City Population: #{citypopd} (#{citypopper.toFixed(2)}%)
+    - const noncitypopd = new Intl.NumberFormat().format(noncitypop);
+    h2 Non-City Population: #{noncitypopd} (#{noncitypopper.toFixed(2)}%)
