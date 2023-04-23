@@ -547,22 +547,39 @@ export default class DatabaseService {
 
   async addCountry(countryParams) {
     // create function to add country to database
-    console.log(countryParams);
-    console.log(countryParams.capital);
-    console.log(countryParams.code);
-    console.log(countryParams.name);
     const data = await this.conn.execute(
       `INSERT IGNORE INTO country (Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2)
                  VALUES ('${countryParams.code}', '${countryParams.name}', '${countryParams.continent}', '${countryParams.region}', '${countryParams.surfacearea}', '${countryParams.indepyear}', '${countryParams.population}', '${countryParams.lifeexpectancy}', '${countryParams.gnp}', '${countryParams.gnpold}', '${countryParams.localname}', '${countryParams.governmentform}', '${countryParams.headofstate}', '${countryParams.capital}', '${countryParams.code2}')`
     );
-
     // Execute Query
     return countryParams;
   }
 
-  async updateCountry(countryParams) {
+  async addCity(cityParams) {
     // create function to add country to database
-    console.log(countryParams);
+    const data = await this.conn.execute(
+      `INSERT IGNORE INTO city (ID, Name, CountryCode, District, Population)
+                 VALUES ('${cityParams.id}', '${cityParams.name}', '${cityParams.countrycode}', '${cityParams.district}', '${cityParams.population}')`
+    );
+    // Execute Query
+    return cityParams;
+  }
+
+  async removeCountry(countryParams) {
+    // create function to add country to database
+    const data = await this.conn.execute(
+      `DELETE FROM country WHERE Code = "${countryParams.code}"`
+    );
+    // Execute Query
     return countryParams;
+  }
+
+  async removeCity(cityParams) {
+    // create function to add country to database
+    const data = await this.conn.execute(
+      `DELETE FROM city WHERE ID = ${cityParams.id}`
+    );
+    // Execute Query
+    return cityParams;
   }
 }

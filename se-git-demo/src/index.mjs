@@ -31,8 +31,17 @@ app.use(
 );
 
 /* Landing route */
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", async (req, res) => {
+  console.log(req.session);
+  const { auth, userId } = req.session;
+  if (!auth) {
+    return res.render("index");
+  }
+  const sql = `SELECT id, email FROM user WHERE user.id = ${userId}`;
+  const [results, cols] = await db.runsql(sql);
+  const result = results[0];
+  const email = result.email;
+  res.render("index-s");
 });
 
 app.post("/countries", async function (req, res) {
@@ -121,7 +130,7 @@ app.post("/population-report", async function (req, res) {
   const citypopper = (citypop * 100) / pop;
   const noncitypop = pop - citypop;
   const noncitypopper = (noncitypop * 100) / pop;
-  
+
   return res.render("population-report", {
     name,
     pop,
@@ -131,25 +140,6 @@ app.post("/population-report", async function (req, res) {
     noncitypopper,
     place,
   });
-});
-
-app.get("/addcountry", async (req, res) => {
-  return res.render("addcountry");
-});
-
-app.post("/add-country", async function (req, res) {
-  // Get the submitted values
-  var params = req.body;
-  // Adding a try/catch block which will be useful later when we add to the database
-  try {
-    await db.addCountry(params).then((result) => {
-      // Just a little output for now
-
-      res.send("data should be added");
-    });
-  } catch (err) {
-    console.error(`Error while adding country `, err.message);
-  }
 });
 
 // Register
@@ -240,21 +230,69 @@ app.post("/delete", async function (req, res) {
   res.redirect("/login");
 });
 
-app.get("/update-country", async (req, res) => {
-  return res.render("updatecountry");
+app.post("/add", async (req, res) => {
+  return res.render("add");
 });
 
-app.post("/update-country", async function (req, res) {
+app.post("/add-country", async function (req, res) {
   // Get the submitted values
   var params = req.body;
   // Adding a try/catch block which will be useful later when we add to the database
   try {
-    await db.updateCountry(params).then((result) => {
+    await db.addCountry(params).then((result) => {
       // Just a little output for now
-      res.send("data should be added");
+
+      res.send("Country was added");
     });
   } catch (err) {
     console.error(`Error while adding country `, err.message);
+  }
+});
+
+app.post("/add-city", async function (req, res) {
+  // Get the submitted values
+  var params = req.body;
+  // Adding a try/catch block which will be useful later when we add to the database
+  try {
+    await db.addCity(params).then((result) => {
+      // Just a little output for now
+
+      res.send("City was added");
+    });
+  } catch (err) {
+    console.error(`Error while adding city `, err.message);
+  }
+});
+
+app.post("/remove", async (req, res) => {
+  return res.render("remove");
+});
+
+app.post("/remove-country", async function (req, res) {
+  // Get the submitted values
+  var params = req.body;
+  // Adding a try/catch block which will be useful later when we add to the database
+  try {
+    await db.removeCountry(params).then((result) => {
+      // Just a little output for now
+      res.send("Country was removed");
+    });
+  } catch (err) {
+    console.error(`Error while removing country `, err.message);
+  }
+});
+
+app.post("/remove-city", async function (req, res) {
+  // Get the submitted values
+  var params = req.body;
+  // Adding a try/catch block which will be useful later when we add to the database
+  try {
+    await db.removeCity(params).then((result) => {
+      // Just a little output for now
+      res.send("City was removed");
+    });
+  } catch (err) {
+    console.error(`Error while removing city `, err.message);
   }
 });
 
