@@ -58,4 +58,12 @@ block content
     input(type="text" name="place" placeholder="Where?")
     input(type='submit' value='Submit')
 
+  p Add Data:
+  form(action='/add', method='POST')
+    input(type='submit' value='Submit')
+    
+  p Remove Data:
+  form(action='/remove', method='POST')
+    input(type='submit' value='Submit')
+
   img.image(src='https://static.vecteezy.com/system/resources/previews/009/314/440/original/earth-globe-clip-art-vector-illustration-isolated-free-png.png' alt='earthIMG')

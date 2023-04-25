@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  h2 Update a country
-    form(action='/update-country', method='POST')
-      input(type='text' name='code' placeholder='Email')
+  h2 Add a new country
+    form(action='/add-country', method='POST')
+      input(type='text' name='code' placeholder='Code')
       input(type='text' name='name' placeholder='Name')
       input(type='text' name='continent' placeholder='Continent')
       input(type='text' name='region' placeholder='Region')
@@ -18,5 +18,15 @@ block content
       input(type='text' name='headofstate' placeholder='HeadOfState')
       input(type='text' name='capital' placeholder='Capital')
       input(type='text' name='code2' placeholder='Code2')
+      div
+      input(type='submit' value='Submit')
+
+  h2 Add a new city
+    form(action='/add-city', method='POST')
+      input(type='text' name='id' placeholder='ID')
+      input(type='text' name='name' placeholder='Name')
+      input(type='text' name='countrycode' placeholder='Country Code')
+      input(type='text' name='district' placeholder='District')
+      input(type='text' name='population' placeholder='Population')
       div
       input(type='submit' value='Submit')
