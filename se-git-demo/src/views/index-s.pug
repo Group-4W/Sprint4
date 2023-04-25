@@ -6,63 +6,63 @@ block content
   p The website features a modern, user-friendly interface that is easy to navigate, allowing users to filter and sort through the data with ease. Users can search for information on specific countries, cities, and population.
   p Whether you're a researcher, government agency, or just someone with an interest in population information, this website is the go-to resource for reliable and comprehensive data. With its user-friendly interface, customizable reports, and powerful data tools, the website is sure to become an essential tool for anyone looking to explore population information.
 
-  p /countries type 'the world', a continent, or region.
+  p Countries: Get a list with the countries in the world, a continent, or a region organized by largest population. (Type 'the world' to get all the countries in the world, and type 'all' to get the full list.)
   form(action='/countries', method='POST')
-    input(type="text" name="place" placeholder="Enter 'the world', a continent, or region.")
-    input(type="text" name="N" placeholder="Enter how many to display, type all for all.")
+    input(type="text" name="place" placeholder="Where?")
+    input(type="text" name="N" placeholder="How many?")
     input(type='submit' value='Submit')
 
-  p /cities type 'the world', a continent, region, country, or district.
+  p Cities: Get a list with the cities in the world, a continent, a region, a country, or a district organized by largest population. (Type 'the world' to get all the cities in the world, and type 'all' to get the full list.)
   form(action='/cities', method='POST')
-    input(type="text" name="place" placeholder="Enter 'the world', a continent, region, country, or district.")
-    input(type="text" name="N" placeholder="Enter how many to display, type all for all.")
+    input(type="text" name="place" placeholder="Where?")
+    input(type="text" name="N" placeholder="How many?")
     input(type='submit' value='Submit')
 
-  p /capitals type 'the world', a continent, or region.
+  p Capitals: Get a list with the capitals in the world, a continent, or a region organized by largest population. (Type 'the world' to get all the capitals in the world, and type 'all' to get the full list.)
   form(action='/capitals', method='POST')
-    input(type="text" name="place" placeholder="Enter 'the world', a continent, or region.")
-    input(type="text" name="N" placeholder="Enter how many to display, type all for all.")
+    input(type="text" name="place" placeholder="Where?")
+    input(type="text" name="N" placeholder="How many?")
     input(type='submit' value='Submit')
 
-  p /city-population type 'country', 'continent', or 'region'.
+  p City Population: Get the population of people, people living in cities, and people not living in cities in each country, continent, or region. (Type 'country', 'continent', or 'region'.)
   form(action='/city-population', method='POST')
-    input(type="text" name="place" placeholder="Enter 'country, 'continent', or 'region'.")
+    input(type="text" name="place" placeholder="Where?")
     input(type='submit' value='Submit')
 
-  p /population type 'the world', a continent, region, country, district, or city.
+  p Population: Get the population of the world, a continent, a region, a country, a district, or a city. (Type 'the world' to get all the capitals in the world.)
   form(action='/population', method='POST')
-    input(type="text" name="place" placeholder="Enter 'the world', a continent, region, country, district, or city.")
+    input(type="text" name="place" placeholder="Where?")
     input(type='submit' value='Submit')
 
-  p /language 
+  p Language: Get the number of people who speak Chinese, English, Hindi, Spanish, and Arabic from greatest number, including the percentage of the world population.
   form(action='/language', method='POST')
     input(type='submit' value='Submit')
 
-  p /country-report type a country.
+  p Country Report: Get a report of a country.
   form(action='/country-report', method='POST')
-    input(type="text" name="place" placeholder="Enter a country.")
+    input(type="text" name="place" placeholder="What country?")
     input(type='submit' value='Submit')
 
-  p /city-report type a city.
+  p City Report: Get a report of a city.
   form(action='/city-report', method='POST')
-    input(type="text" name="place" placeholder="Enter a city.")
+    input(type="text" name="place" placeholder="What city?")
     input(type='submit' value='Submit')
 
-  p /capital-report type a capital.
+  p Capital Report: Get a report of a capital.
   form(action='/capital-report', method='POST')
-    input(type="text" name="place" placeholder="Enter a capital.")
+    input(type="text" name="place" placeholder="What capital?")
     input(type='submit' value='Submit')
 
-  p /population-report type a continent, region, or country.
+  p Population Report: Get the population, the population living in cities including percentage, and the population not living in cities including percentage of a continent, region, or country.
   form(action='/population-report', method='POST')
-    input(type="text" name="place" placeholder="Enter acontinent, region, or country.")
+    input(type="text" name="place" placeholder="Where?")
     input(type='submit' value='Submit')
 
-  p /add.
+  p Add Data:
   form(action='/add', method='POST')
     input(type='submit' value='Submit')
     
-  p /remove.
+  p Remove Data:
   form(action='/remove', method='POST')
     input(type='submit' value='Submit')
 
