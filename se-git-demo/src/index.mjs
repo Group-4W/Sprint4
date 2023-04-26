@@ -143,7 +143,7 @@ app.post("/population-report", async function (req, res) {
 });
 
 // Register
-app.get("/register", function (req, res) {
+app.post("/register", function (req, res) {
   res.render("register");
 });
 // Login
