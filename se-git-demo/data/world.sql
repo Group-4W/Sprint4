@@ -26,6 +26,24 @@ CREATE DATABASE `world` DEFAULT CHARACTER SET utf8mb4;
 
 USE `world`;
 
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+ `id` int NOT NULL AUTO_INCREMENT,
+ `email` varchar(255) NOT NULL,
+ `password` varchar(255) NOT NULL
+ PRIMARY KEY (`id`),
+ UNIQUE INDEX email_index (`email`)
+);
+--
+-- Dumping data for table `Users`
+--
+INSERT INTO `user` VALUES (1, 'sebas@example.com', 'password');
+INSERT INTO `user` VALUES (2, 'torre@example.com', 'password2');
+COMMIT;
+
+
 --
 -- Table structure for table `city`
 --
@@ -4142,7 +4160,7 @@ DROP TABLE IF EXISTS `country`;
 CREATE TABLE `country` (
   `Code` char(3) NOT NULL DEFAULT '',
   `Name` char(52) NOT NULL DEFAULT '',
-  `Continent` enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') NOT NULL DEFAULT 'Asia',
+  `Continent` enum('Asia','Europe','North America','Africa','Oceania','South America') NOT NULL DEFAULT 'Asia',
   `Region` char(26) NOT NULL DEFAULT '',
   `SurfaceArea` decimal(10,2) NOT NULL DEFAULT '0.00',
   `IndepYear` smallint DEFAULT NULL,
@@ -4176,8 +4194,6 @@ INSERT INTO `country` VALUES ('ARE','United Arab Emirates','Asia','Middle East',
 INSERT INTO `country` VALUES ('ARG','Argentina','South America','South America',2780400.00,1816,37032000,75.1,340238.00,323310.00,'Argentina','Federal Republic','Fernando de la Rúa',69,'AR');
 INSERT INTO `country` VALUES ('ARM','Armenia','Asia','Middle East',29800.00,1991,3520000,66.4,1813.00,1627.00,'Hajastan','Republic','Robert Kotšarjan',126,'AM');
 INSERT INTO `country` VALUES ('ASM','American Samoa','Oceania','Polynesia',199.00,NULL,68000,75.1,334.00,NULL,'Amerika Samoa','US Territory','George W. Bush',54,'AS');
-INSERT INTO `country` VALUES ('ATA','Antarctica','Antarctica','Antarctica',13120000.00,NULL,0,NULL,0.00,NULL,'–','Co-administrated','',NULL,'AQ');
-INSERT INTO `country` VALUES ('ATF','French Southern territories','Antarctica','Antarctica',7780.00,NULL,0,NULL,0.00,NULL,'Terres australes françaises','Nonmetropolitan Territory of France','Jacques Chirac',NULL,'TF');
 INSERT INTO `country` VALUES ('ATG','Antigua and Barbuda','North America','Caribbean',442.00,1981,68000,70.5,612.00,584.00,'Antigua and Barbuda','Constitutional Monarchy','Elisabeth II',63,'AG');
 INSERT INTO `country` VALUES ('AUS','Australia','Oceania','Australia and New Zealand',7741220.00,1901,18886000,79.8,351182.00,392911.00,'Australia','Constitutional Monarchy, Federation','Elisabeth II',135,'AU');
 INSERT INTO `country` VALUES ('AUT','Austria','Europe','Western Europe',83859.00,1918,8091800,77.7,211860.00,206025.00,'Österreich','Federal Republic','Thomas Klestil',1523,'AT');
@@ -4199,7 +4215,6 @@ INSERT INTO `country` VALUES ('BRA','Brazil','South America','South America',854
 INSERT INTO `country` VALUES ('BRB','Barbados','North America','Caribbean',430.00,1966,270000,73.0,2223.00,2186.00,'Barbados','Constitutional Monarchy','Elisabeth II',174,'BB');
 INSERT INTO `country` VALUES ('BRN','Brunei','Asia','Southeast Asia',5765.00,1984,328000,73.6,11705.00,12460.00,'Brunei Darussalam','Monarchy (Sultanate)','Haji Hassan al-Bolkiah',538,'BN');
 INSERT INTO `country` VALUES ('BTN','Bhutan','Asia','Southern and Central Asia',47000.00,1910,2124000,52.4,372.00,383.00,'Druk-Yul','Monarchy','Jigme Singye Wangchuk',192,'BT');
-INSERT INTO `country` VALUES ('BVT','Bouvet Island','Antarctica','Antarctica',59.00,NULL,0,NULL,0.00,NULL,'Bouvetøya','Dependent Territory of Norway','Harald V',NULL,'BV');
 INSERT INTO `country` VALUES ('BWA','Botswana','Africa','Southern Africa',581730.00,1966,1622000,39.3,4834.00,4935.00,'Botswana','Republic','Festus G. Mogae',204,'BW');
 INSERT INTO `country` VALUES ('CAF','Central African Republic','Africa','Central Africa',622984.00,1960,3615000,44.0,1054.00,993.00,'Centrafrique/Bê-Afrîka','Republic','Ange-Félix Patassé',1889,'CF');
 INSERT INTO `country` VALUES ('CAN','Canada','North America','North America',9970610.00,1867,31147000,79.4,598862.00,625626.00,'Canada','Constitutional Monarchy, Federation','Elisabeth II',1822,'CA');
@@ -4258,7 +4273,6 @@ INSERT INTO `country` VALUES ('GUF','French Guiana','South America','South Ameri
 INSERT INTO `country` VALUES ('GUM','Guam','Oceania','Micronesia',549.00,NULL,168000,77.8,1197.00,1136.00,'Guam','US Territory','George W. Bush',921,'GU');
 INSERT INTO `country` VALUES ('GUY','Guyana','South America','South America',214969.00,1966,861000,64.0,722.00,743.00,'Guyana','Republic','Bharrat Jagdeo',928,'GY');
 INSERT INTO `country` VALUES ('HKG','Hong Kong','Asia','Eastern Asia',1075.00,NULL,6782000,79.5,166448.00,173610.00,'Xianggang/Hong Kong','Special Administrative Region of China','Jiang Zemin',937,'HK');
-INSERT INTO `country` VALUES ('HMD','Heard Island and McDonald Islands','Antarctica','Antarctica',359.00,NULL,0,NULL,0.00,NULL,'Heard and McDonald Islands','Territory of Australia','Elisabeth II',NULL,'HM');
 INSERT INTO `country` VALUES ('HND','Honduras','North America','Central America',112088.00,1838,6485000,69.9,5333.00,4697.00,'Honduras','Republic','Carlos Roberto Flores Facussé',933,'HN');
 INSERT INTO `country` VALUES ('HRV','Croatia','Europe','Southern Europe',56538.00,1991,4473000,73.7,20208.00,19300.00,'Hrvatska','Republic','Štipe Mesic',2409,'HR');
 INSERT INTO `country` VALUES ('HTI','Haiti','North America','Caribbean',27750.00,1804,8222000,49.2,3459.00,3107.00,'Haïti/Dayti','Republic','Jean-Bertrand Aristide',929,'HT');
@@ -4352,7 +4366,6 @@ INSERT INTO `country` VALUES ('SAU','Saudi Arabia','Asia','Middle East',2149690.
 INSERT INTO `country` VALUES ('SDN','Sudan','Africa','Northern Africa',2505813.00,1956,29490000,56.6,10162.00,NULL,'As-Sudan','Islamic Republic','Omar Hassan Ahmad al-Bashir',3225,'SD');
 INSERT INTO `country` VALUES ('SEN','Senegal','Africa','Western Africa',196722.00,1960,9481000,62.2,4787.00,4542.00,'Sénégal/Sounougal','Republic','Abdoulaye Wade',3198,'SN');
 INSERT INTO `country` VALUES ('SGP','Singapore','Asia','Southeast Asia',618.00,1965,3567000,80.1,86503.00,96318.00,'Singapore/Singapura/Xinjiapo/Singapur','Republic','Sellapan Rama Nathan',3208,'SG');
-INSERT INTO `country` VALUES ('SGS','South Georgia and the South Sandwich Islands','Antarctica','Antarctica',3903.00,NULL,0,NULL,0.00,NULL,'South Georgia and the South Sandwich Islands','Dependent Territory of the UK','Elisabeth II',NULL,'GS');
 INSERT INTO `country` VALUES ('SHN','Saint Helena','Africa','Western Africa',314.00,NULL,6000,76.8,0.00,NULL,'Saint Helena','Dependent Territory of the UK','Elisabeth II',3063,'SH');
 INSERT INTO `country` VALUES ('SJM','Svalbard and Jan Mayen','Europe','Nordic Countries',62422.00,NULL,3200,NULL,0.00,NULL,'Svalbard og Jan Mayen','Dependent Territory of Norway','Harald V',938,'SJ');
 INSERT INTO `country` VALUES ('SLB','Solomon Islands','Oceania','Melanesia',28896.00,1978,444000,71.3,182.00,220.00,'Solomon Islands','Constitutional Monarchy','Elisabeth II',3161,'SB');

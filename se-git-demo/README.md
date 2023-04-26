@@ -8,10 +8,10 @@ assessed based on the following criteria.
 
 The following must be in place:
 
-- [ ]  Overall application quality and success at meeting the aims set out during the design process
+- [X]  Overall application quality and success at meeting the aims set out during the design process
 - [ ]  Metrics from GitHub: used to assess individual contribution
-- [ ]  Application deployable using a docker-compose file, data can be provided separately
+- [X]  Application deployable using a docker-compose file, data can be provided separately (working on certain machines)
 - [ ]  Final version of the task board and project requirements met
-- [ ]  Deployment working
-- [ ]  Bug reporting system set-up
+- [X]  Deployment working
+- [X]  Bug reporting system set-up
 - [ ]  A group report (**maximum 10 pages**), where you need to present your work as a team

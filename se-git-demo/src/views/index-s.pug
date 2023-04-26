@@ -58,3 +58,11 @@ block content
   form(action='/population-report', method='POST')
     input(type="text" name="place" placeholder="Where?")
     input(type='submit' value='Submit')
+
+  p Add Data:
+  form(action='/add', method='POST')
+    input(type='submit' value='Submit')
+    
+  p Remove Data:
+  form(action='/remove', method='POST')
+    input(type='submit' value='Submit')

@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h2 Remove country
+    form(action='/remove-country', method='POST')
+      input(type='text' name='code' placeholder='Enter Code')
+      input(type='submit' value='Submit')
+  h2 Remove city
+    form(action='/remove-city', method='POST')
+      input(type='text' name='id' placeholder='Enter ID')
+      input(type='submit' value='Submit')
